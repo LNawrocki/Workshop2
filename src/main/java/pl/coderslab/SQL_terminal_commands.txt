@@ -12,3 +12,4 @@ CREATE table users (
 
 describe users;
 
+DROP TABLE users;
