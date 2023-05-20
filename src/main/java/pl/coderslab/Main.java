@@ -3,7 +3,6 @@ package pl.coderslab;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UserDao;
 
-import javax.sound.midi.Soundbank;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-        try(Connection conn =  DbUtil.connectWorkshop2();) {
+        try(Connection conn =  DbUtil.getConnection();) {
             String CREATE_TABLE_QUERY = "CREATE table users (\n" +
                     "    id int(11) not null auto_increment, primary key(id),\n" +
                     "    email varchar(255) not null UNIQUE ,\n" +
@@ -61,15 +60,14 @@ public class Main {
                 System.out.println(rs.getString("password") + " ");
             }
 
-            userDao.read(2);
+            System.out.println();
+            User user5 = userDao.read(2);
+
 
 
             Scanner scan = new Scanner(System.in);
             System.out.println("naciśnij ENETR  żeby zakończyć");
             scan.nextLine();
-
-
-
 
             String DROP_TABLE_QUERY = "DROP TABLE users";
 
@@ -79,9 +77,6 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
-
 
     }
 }
