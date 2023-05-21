@@ -13,3 +13,9 @@ CREATE table users (
 describe users;
 
 DROP TABLE users;
+
+    INSERT INTO users (username, email, password) VALUES (?, ?, ?);
+    UPDATE users SET email = ?, userName = ?, password = ? WHERE id = ?;
+    SELECT * FROM users WHERE id = ?;
+    SELECT * FROM users;
+    DELETE FROM users WHERE id = ?;

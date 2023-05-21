@@ -3,10 +3,7 @@ package pl.coderslab;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UserDao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
@@ -23,6 +20,10 @@ public class Main {
             Statement stmt1 = conn.createStatement();
             stmt1.executeUpdate(CREATE_TABLE_QUERY);
 
+            UserDao userDao = new UserDao();
+
+            userDao.printAll();
+            System.out.println();
 
             User user1 = new User();
             user1.setEmail("111@111.pl");
@@ -39,29 +40,33 @@ public class Main {
             user3.setUserName("user3");
             user3.setPassword("pass3");
 
-            UserDao userDao = new UserDao();
             userDao.create(user1);
             userDao.create(user2);
             userDao.create(user3);
 
-            String PRINT_TABLE_QUERY = "select * from users";
-            Statement stmt2 = conn.createStatement();
-            ResultSet rs = stmt2.executeQuery(PRINT_TABLE_QUERY);
+            userDao.printAll();
+            System.out.println();
 
-            while (rs.next()) {
-//                String firstName = rs.getString("user_name");
-//                int id = 0;
-//                String email = "";
-//                String username = "";
-//                String password = "";
-                System.out.print(rs.getInt("id") + " ");
-                System.out.print(rs.getString("email") + " ");
-                System.out.print(rs.getString("username") + " ");
-                System.out.println(rs.getString("password") + " ");
+
+            User user5 = new User();
+            user5.setEmail("123@123.pl");
+            user5.setUserName("user123");
+            user5.setPassword("pass123");
+
+            userDao.update(user5);
+
+            userDao.printAll();
+            System.out.println();
+
+            userDao.delete(1);
+            User[] tabOfUser = userDao.printAll();
+            for (User user : tabOfUser) {
+                System.out.println(user.getId() + " "
+                        + user.getEmail() + " "
+                        + user.getUserName() + " "
+                        + user.getPassword());
             }
 
-            System.out.println();
-            User user5 = userDao.read(2);
 
 
 
@@ -79,4 +84,5 @@ public class Main {
         }
 
     }
+
 }
