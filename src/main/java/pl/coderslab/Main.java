@@ -47,8 +47,10 @@ public class Main {
             userDao.printAll();
             System.out.println();
 
+            UserDao userDao1 = new UserDao();
+            User user5 = userDao1.read(2);
 
-            User user5 = new User();
+//            User user5 = new User();
             user5.setEmail("123@123.pl");
             user5.setUserName("user123");
             user5.setPassword("pass123");
@@ -58,7 +60,13 @@ public class Main {
             userDao.printAll();
             System.out.println();
 
-            userDao.delete(1);
+            User userRead = userDao.read(4);
+            System.out.println(userRead);
+
+            userDao.delete(3);
+            System.out.println();
+
+
             User[] tabOfUser = userDao.printAll();
             for (User user : tabOfUser) {
                 System.out.println(user.getId() + " "
@@ -70,9 +78,9 @@ public class Main {
 
 
 
-            Scanner scan = new Scanner(System.in);
-            System.out.println("naciśnij ENETR  żeby zakończyć");
-            scan.nextLine();
+//            Scanner scan = new Scanner(System.in);
+//            System.out.println("naciśnij ENETR  żeby zakończyć");
+//            scan.nextLine();
 
             String DROP_TABLE_QUERY = "DROP TABLE users";
 
@@ -82,6 +90,8 @@ public class Main {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
 
     }
 

@@ -86,7 +86,6 @@ public class UserDao {
             PreparedStatement statement = conn.prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getEmail());
-//            statement.setString(3, user.getPassword());
             statement.setString(3, hashPassword(user.getPassword()));
             statement.executeUpdate();
             //Pobieramy wstawiony do bazy identyfikator, a następnie ustawiamy id obiektu user.
@@ -101,7 +100,11 @@ public class UserDao {
         }
     }
 
+
     public String hashPassword(String password) {
+
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
+
 }
